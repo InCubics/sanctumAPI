@@ -39,8 +39,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public $relatedModels = ['employee','customer'];
-
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'id', 'id');

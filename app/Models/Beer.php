@@ -11,7 +11,7 @@ class Beer extends Model
 
     protected $fillable=['name', 'brewer', 'type', 'yeast', 'amount', 'price'];
 
-    public $relatedModels   = ['orders'];               // required to add relational-data to response (create a collection)
+//    public $relatedModels   = ['orders'];               // required to add relational-data to response (create a collection)
     public $pivotFields     = ['amount','price'];       // specific keys required to fill fields in pivot-table
 
     ///// ORDER /////

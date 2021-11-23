@@ -17,7 +17,6 @@ class Order extends Model
         'price'
     ];
 
-    public $relatedModels   = ['customer','employee','beers']; // required to add relational-data to response (create a collection)
     public $pivotFields     = ['amount','price'];              // specific keys required to fill fields in pivot-table
 
     //// CUSTOMER ////

@@ -30,10 +30,29 @@ class SelectController extends BaseController
             $this->status = 404;
             $this->message  = 'Invalid request, provide an numeric id';
         }
-        elseif(is_numeric($request->id)
-           && $this->data = $this->objModel->with($this->objModel->relatedModels)->find($request->id))
+        elseif(is_numeric($request->id) && $request->with !== null )
         {
-            if(count($this->data->toArray()) >0)
+            $arrayRelations = explode(',', $request->with);
+            foreach($arrayRelations as $relation)
+            {
+                if(!method_exists($this->objModel, $relation))
+                {
+                    $this->message  ='Given relation not found in: '.ucfirst($request->model).' Model';
+                    return $this->sendResponse($request);
+                }
+            }
+            $this->data = $this->objModel->with($arrayRelations)->find($request->id);
+            $this->success  =true;
+            $this->status   =200;
+            $this->message  ='Found record on: '.ucfirst($request->model).'Model with a relation(s) on :'.$request->with;
+            $this->count    = 1;
+            $this->paginate =$request->paginate;
+            $this->page     =$request->page;
+        }
+        elseif(is_numeric($request->id)
+           && $this->data = $this->objModel->find($request->id))
+        {
+            if(count($this->data->toArray()) > 0)
             {
                 $this->success=true;
                 $this->status=200;
@@ -60,10 +79,9 @@ class SelectController extends BaseController
         elseif(empty($this->objModel->relatedModels)) {
             $this->objModel->relatedModels = [];
         }
-
-        if($request->action === null
-            && $this->data = $this->objModel->with($this->objModel->relatedModels)
-                    ->paginate($request->paginate, [ '*' ], 'page', $request->page)->all()  )   {
+        if($request->action === null && empty($request->paginate) && $request->with === null)
+        {
+            $this->data = $this->objModel->all();
                 $this->success  =true;
                 $this->status   =200;
                 $this->message  ='Found records of: '.ucfirst($request->model).'Model ';
@@ -71,6 +89,39 @@ class SelectController extends BaseController
                 $this->paginate =$request->paginate;
                 $this->page     =$request->page;
             }
+        elseif($request->paginate !== null && is_numeric($request->paginate) && $request->with === null)
+        {
+            $this->data = $this->objModel->with($this->objModel->relatedModels)
+                    ->paginate($request->paginate, [ '*' ], 'page', $request->page)->all();
+            if(empty($request->page)) {$request->page = 1;}
+            $this->success  =true;
+            $this->status   =200;
+            $this->message  ='Found records of: '.ucfirst($request->model).'Model paginated per '.$request->paginate;
+            $this->message  .= ', page '.$request->page;
+            $this->count    =count($this->data);
+            $this->paginate =$request->paginate;
+            $this->page     =$request->page;
+        }
+        elseif($request->with !== null )
+        {
+            $arrayRelations = explode(',', $request->with);
+            foreach($arrayRelations as $relation)
+            {
+                if(!method_exists($this->objModel, $relation))
+                {
+                    $this->message  ='Given relation not found in: '.ucfirst($request->model).' Model';
+                    return $this->sendResponse($request);
+                }
+            }
+            $this->data = $this->objModel->with($arrayRelations)->get();
+            $this->success  =true;
+            $this->status   =200;
+            $this->message  ='Found records of: '.ucfirst($request->model).'Model with a relation(s) on :'.$request->with;
+            $this->count    =count($this->data);
+            $this->paginate =$request->paginate;
+            $this->page     =$request->page;
+        }
+
         return $this->sendResponse($request);
     }
 }

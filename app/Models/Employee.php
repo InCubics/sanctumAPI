@@ -29,7 +29,6 @@ class Employee extends Model
         'salary_scale'
     ];
 
-    public $relatedModels   = ['orders','user'];              // required to add relational-data to response (create a collection)
     public $pivotFields     = ['amount','price'];             // specific keeys required to fill fields in pivot-table
 
     public function orders()

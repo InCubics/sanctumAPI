@@ -16,8 +16,6 @@ class Customer extends Model
         'deleted_at'
     ];
 
-    public $relatedModels   = ['orders','user'];  // required to add relational-data to response (create a collection)
-
     protected $hidden = [
         'bankcard',
     ];
