@@ -1,0 +1,12 @@
+rewriteEngine on
+RewriteCond %{HTTP_HOST} ^(www.)?sanctumapi.rk$
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /public/$1
+RewriteCond %{HTTP_HOST} ^(www.)?sanctumapi.rk$
+RewriteRule ^(/)?$ public/index.php [L]
+#
+#  RewriteCond %{HTTP_HOST} ^larapi2021.incubics.net.com$
+#  RewriteCond %{REQUEST_URI} /larapi2021/public/
+#  RewriteRule (.*
