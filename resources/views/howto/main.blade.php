@@ -8,7 +8,12 @@
         <br>
         It calls API-requests dynamically to all existing models and checks also if data is valid.<br>
         To setup your own API-server, there are just several small steps required:<br>
-        1) Just make your database-tables, 2) insert your data, 3) create Models as always and 4) add FormRequests (validation).<br>
+        <ol>
+            <li> 1. Just make your database-tables with data,</li>
+            <li> 2. polulate your data in the database tables,</li>
+            <li> 3. create Models as always (optional: with there relations),</li>
+            <li> 4. add FormRequests (validation).</li>
+        </ol>
         if you want requests ro add related data, there are two extra line required in a Model.<br>
         <br>
         The response contains always a data-key with data or a boolean as value,<br>
@@ -19,7 +24,7 @@
         <br>
         There are some examples migrations and seeders available to show and test the all the functionalities.<br>
         <br>
-        <p><i class="fa fa-refresh" style="font-size:13px;"></i> All data and accounts will be reset every two hour</p>
+        <p><i class="fa fa-refresh" style="font-size:13px;"></i> All data and accounts on this demo-server will be reset every two hour</p>
         <p><i class="fa fa-spinner fa-spin"></i>  You need a valid account to receive a token to use CRUD-functionality .</p>
         <p><i class="fa fa-spinner fa-spin"></i>  Download  a POSTMAN-<a href="{{url('postman_testing')}}">workspace</a>,
             then import it and test the Sanctum-API.</p>
@@ -58,8 +63,19 @@
             <td><a href="{{url('/howto/getdata#invalid')}}">invalid requests</a></td>
         </tr>
         <tr>
-            <th>🛢 models</th>
+            <th>🛢 current models</th>
             <td colspan="2">@foreach($tables as $table) {{pathinfo($table, PATHINFO_FILENAME).','}} @endforeach</td>
+            <td colspan="2">db-tablenames; lowercase + appending 's'</td>
+        </tr>
+        <tr>
+            <th>⛓ relations models</th>
+            <td colspan="2">
+                <b>User</b> has relation-method(s): employee, customer<br>
+                <b>Beer</b> has relation-method: orders<br>
+                <b>Customer</b> has relation-method(s): orders, user<br>
+                <b>Employee</b> has relation-method(s): orders, user<br>
+                <b>Order</b> has relation-method(s): beers, customer, employee<br>
+            </td>
             <td colspan="2">db-tablenames; lowercase + appending 's'</td>
         </tr>
         </tbody>

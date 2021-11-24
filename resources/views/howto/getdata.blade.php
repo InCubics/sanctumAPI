@@ -7,10 +7,6 @@
     </div>
     <div class="text-left m-b-md" style="height: 500px; overflow: auto;">
         <i>Finding data</i><br>
-        <br>
-        To receive also additional data fro  related Models, add to yoyr model eq:<br>
-        public $relatedModels   = ['customer','employee','beers']; // required to add relational-data to response (create a collection)<br>
-        <br>
         The url contains the name of the Model with the option you want, some examples:<br>
         <br>
 
