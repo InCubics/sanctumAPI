@@ -13,7 +13,7 @@
         For an order an employee-id and a customer-id are requites.
         On an order beers can be ordered in an many-to-many relation.
         <br><br>
-        <i class="text-red-500">No roll-based-access-control is implemented.</i>
+        <i class="text-red-500">Roll-based-access-control is NOT implemented.</i>
         <br>
     <table class="table table-striped w-100">
             <tbody>
