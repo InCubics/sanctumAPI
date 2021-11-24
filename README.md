@@ -20,13 +20,6 @@ and a meta-key with additional data (eq: success, validation-errors and more).
 Include in the request-header a key: 'Accept' with the value: 'application/json'.
 All requests will provide a json-response.
 
-There are some examples migrations and seeders available to show and test the all the functionalities.
-
- All data and accounts on this demo-server will be reset every two hour
-
- You need a valid account to receive a token to use CRUD-functionality .
-
- Download a POSTMAN-workspace, then import it and test the Sanctum-API.
 
 
 ## Demo-version
