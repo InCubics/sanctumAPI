@@ -18,13 +18,15 @@ class CrudController extends BaseController
 
     public function createRecord(Request $request)
     {
-        $rq='\App\Http\Requests\\'.ucfirst($request->model).'Request';     // request to validate submitted data
-        $validator=Validator::make($request->all(), (array)(new $rq())->rules());
-        if(!is_object($this->objModel))     {   // if record not found
+        if($this->objModel === null)     {   // if record not found
             $this->status   =400;   // Bad request
             $this->message  ='Requested model '.ucfirst($request->model).'Model doesn\'t exist';
+            return $this->sendResponse($request);
         }
-        elseif(class_exists($rq) && $validator->fails())    {   // if validation fails
+
+        $rq='\App\Http\Requests\\'.ucfirst($request->model).'Request';     // request to validate submitted data
+        $validator=Validator::make($request->all(), (array)(new $rq())->rules());
+        if(class_exists($rq) && $validator->fails())    {   // if validation fails
             $this->success      =false;
             $this->status       =412;   // Precondition failed
             $this->message      ='Invalid submitted data provided for changes on '.ucfirst($request->model).'Model';
@@ -48,8 +50,13 @@ class CrudController extends BaseController
 
     public function updateRecord(Request $request)
     {
-        if($this->objModel->pivotFields)
-        {
+           if($this->objModel === null)     {   // if record not found
+            $this->status   =400;   // Bad request
+            $this->message  ='Requested model '.ucfirst($request->model).'Model doesn\'t exist';
+            return $this->sendResponse($request);
+        }
+
+        if($this->objModel->pivotFields)    {
             $pushPivot=array_diff($request->all($this->objModel->pivotFields), array('')); // get only pivot-values en remove empty keys
             $fillModel=\Arr::except($request->all(), array_merge($this->objModel->pivotFields, ['_method', strstr($request->with, 's').'_id', $request->model.'_id'])); // get values for the Model and remove all other keys
         }
@@ -61,12 +68,7 @@ class CrudController extends BaseController
         $validator=Validator::make($request->all(), (array)(new $rq())->rules());
         $record = $this->objModel->find($request->id);
 
-        if(!is_object($record))
-        {   // if record not found
-            $this->status   =400;   // Bad request
-            $this->message  ='Requested model '.ucfirst($request->model).'Model doesn\'t exist';
-        }
-        elseif(class_exists($rq) && $validator->fails())    {   // if validation fails
+        if(class_exists($rq) && $validator->fails())    {   // if validation fails
             $this->success      =false;
             $this->status       =412;   // Precondition failed
             $this->message      ='Invalid submitted data provided for changes on '.ucfirst($request->model).'Model';
@@ -101,15 +103,15 @@ class CrudController extends BaseController
 
     public function deleteRecord(Request $request)
     {
-        ///
-
-        if(!$record = $this->objModel->find($request->id))      {   // if record not found
+        if($this->objModel === null)     {   // if record not found
             $this->status   =400;   // Bad request
             $this->message  ='Requested model '.ucfirst($request->model).'Model doesn\'t exist';
+            return $this->sendResponse($request);
         }
-        elseif(empty($record))    {   // if record NOT found
-            $this->status   =400;  // Bad request
+        elseif(!$record = $this->objModel->find($request->id))      {   // if record not found
+            $this->status   =400;   // Bad request
             $this->message  ='Requested record to delete with id: '.$request->id.' NOT found on '.ucfirst($request->model).'Model';
+            return $this->sendResponse($request);
         }
 
         $relation=$request->with.'s';

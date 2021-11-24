@@ -7,7 +7,6 @@ use App\Http\Controllers\Api\BaseController;
 
 class SelectController extends BaseController
 {
-
     public function __construct(Request $request)
     {
         if(class_exists('\App\Models\\'.ucfirst($request->model)))     {
@@ -18,20 +17,18 @@ class SelectController extends BaseController
 
     public function findRecord(Request $request)
     {
-       if(!is_object($this->objModel))     {   // if model not found
+       if($this->objModel ===null )     {   // if model not found
             $this->status   =400;   // Bad request
             $this->message  ='Requested model '.ucfirst($request->model).'Model not found';
+           return $this->sendResponse($request);
         }
-       elseif(empty($this->objModel->relatedModels)) {
-           $this->objModel->relatedModels = [];
-       }
 
         if( ! is_numeric($request->id))     {
             $this->status = 404;
             $this->message  = 'Invalid request, provide an numeric id';
         }
-        elseif(is_numeric($request->id) && $request->with !== null )
-        {
+        elseif(is_numeric($request->id) && $request->with !== null && $this->objModel->find($request->id) )
+        {   // find record by id with its additional data on relation(s) - with
             $arrayRelations = explode(',', $request->with);
             foreach($arrayRelations as $relation)
             {
@@ -49,9 +46,8 @@ class SelectController extends BaseController
             $this->paginate =$request->paginate;
             $this->page     =$request->page;
         }
-        elseif(is_numeric($request->id)
-           && $this->data = $this->objModel->find($request->id))
-        {
+        elseif(is_numeric($request->id) && $this->data = $this->objModel->find($request->id))
+        {   // find record by id
             if(count($this->data->toArray()) > 0)
             {
                 $this->success=true;
@@ -60,7 +56,7 @@ class SelectController extends BaseController
                 $this->count=1;
             }
         }
-        else {
+        else {  // record NOT found
             $this->data     = [];
             $this->success  =false;
             $this->status   =400;   // Bad request
@@ -72,15 +68,14 @@ class SelectController extends BaseController
 
     public function allRecords(Request $request)
     {
-        if(!is_object($this->objModel))     {   // if model not found
+        if($this->objModel ===null )     {   // if model not found
             $this->status   =400;   // Bad request
             $this->message  ='Requested model '.ucfirst($request->model).'Model not found';
+            return $this->sendResponse($request);
         }
-        elseif(empty($this->objModel->relatedModels)) {
-            $this->objModel->relatedModels = [];
-        }
+
         if($request->action === null && empty($request->paginate) && $request->with === null)
-        {
+        {   // get all records
             $this->data = $this->objModel->all();
                 $this->success  =true;
                 $this->status   =200;
@@ -90,7 +85,7 @@ class SelectController extends BaseController
                 $this->page     =$request->page;
             }
         elseif($request->paginate !== null && is_numeric($request->paginate) && $request->with === null)
-        {
+        {   // get all records paginated and optional paged
             $this->data = $this->objModel->with($this->objModel->relatedModels)
                     ->paginate($request->paginate, [ '*' ], 'page', $request->page)->all();
             if(empty($request->page)) {$request->page = 1;}
@@ -103,12 +98,11 @@ class SelectController extends BaseController
             $this->page     =$request->page;
         }
         elseif($request->with !== null )
-        {
+        {   // get all record that has additional data on relation(s)  - with
             $arrayRelations = explode(',', $request->with);
             foreach($arrayRelations as $relation)
             {
-                if(!method_exists($this->objModel, $relation))
-                {
+                if(!method_exists($this->objModel, $relation))  {
                     $this->message  ='Given relation not found in: '.ucfirst($request->model).' Model';
                     return $this->sendResponse($request);
                 }

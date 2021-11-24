@@ -37,6 +37,7 @@ class BaseController extends Controller
 
     private function getMeta(Request $request)
     {
+        $user = auth('sanctum')->user();
         return [
             'success'           =>$this->success,          // success: true || false
             'status'            =>$this->status,           // html response-status
@@ -47,12 +48,15 @@ class BaseController extends Controller
             'pagination'        =>$this->paginate,
             'page'              =>$this->page,
 
+            'whoami'            => ['email' => (!empty($user->email)) ? $user->email : null ,
+                                    'id'=>(!empty($user->id)) ? $user->id : null], // Who Am I
             'default_lang'      =>config('app.fallback_locale'),
             'locale'            =>config('app.locale'),
             'host'              =>$request->getHost(),
             'httphost'          =>$request->getHttpHost(),
             'root'              =>$request->root(),
             'path'              => $request->path(),
+
         ];
     }
 
