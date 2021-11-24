@@ -53,6 +53,54 @@
             <td>/api/beer</td>
         </tr>
 
+
+        <thead>
+        <tr>
+            <th colspan="10" id="with">find specific record by id with related data</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>GET</th>
+            <td>/api/beer/8?with=orders</td>
+            <td>/api/order/1?with=employee,customer,beers</td>
+        </tr>
+
+        <thead>
+        <tr>
+            <th colspan="10" id="with2">get all records with relations</th>
+        </tr>
+        </thead>
+        <tr>
+            <th>GET</th>
+            <td>/api/order?with=beers,employee</td>
+            <td>/api/order?with=beers,employee,customer</td>
+        </tr>
+
+
+        <thead>
+        <tr>
+            <th colspan="10" id="paginate">get all records paginated</th>
+        </tr>
+        </thead>
+        <tr>
+            <th>GET</th>
+            <td>/api/order?paginate=5</td>
+            <td>/api/beer?paginate=3&page=3</td>
+        </tr>
+
+
+        <thead>
+        <tr>
+            <th colspan="10" id="invalid">incorrect / not found</th>
+        </tr>
+        </thead>
+        <tr>
+            <th>any</th>
+            <td>/api/beer/88AAA88<br>/api/beer/88888888888</td>
+            <td>/api/beerNotExisting<br>/api/userNotExisting/2</td>
+        </tr>
+
         </tbody>
     </table>
     </div>

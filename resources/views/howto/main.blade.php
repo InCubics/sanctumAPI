@@ -38,8 +38,9 @@
             <th class=""><a href="{{url('/howto/getdata')}}">👓 Selecting</a></th>
             <td><a href="{{url('/howto/getdata#find')}}">find</a></td>
             <td><a href="{{url('/howto/getdata#all')}}">all</a></td>
-            <td></td>
-            <td></td>
+            <td><a href="{{url('/howto/getdata#with')}}">with relations</a></td>
+            <td><a href="{{url('/howto/getdata#paginate')}}">pagination</a></td>
+
         </tr>
         <tr>
             <th><a href="{{url('/howto/crud')}}">🛠 Altering</a></th>
@@ -47,13 +48,14 @@
             <td><a href="{{url('/howto/crud#update')}}">update</a></td>
             <td><a href="{{url('/howto/crud#update_pivot')}}">update with pivot</a></td>
             <td><a href="{{url('/howto/crud#delete')}}">delete</a></td>
+            <td></td>
         </tr>
         <tr>
             <th ><a href="{{url('/howto/oauth')}}">🔐 tokens</a></th>
             <td><a href="{{url('/howto/oauth#password')}}">password-grant</a></td>
             <td><a href="{{url('/howto/rights')}}">* accounts on demo</a></td>
             <td></td>
-            <td></td>
+            <td><a href="{{url('/howto/getdata#invalid')}}">invalid requests</a></td>
         </tr>
         <tr>
             <th>🛢 models</th>
