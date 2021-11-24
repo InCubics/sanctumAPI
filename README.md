@@ -25,7 +25,7 @@ All requests will provide a json-response.
 ## Demo-version
 
 Read the how-to on:
-**[sanctumAPI demo](https://samctumapi.incubics.net.com/)**
+**[sanctumAPI demo](https://sanctumapi.incubics.net.com/)**
 
 Use Postman and provided export with API-requests for testing
 
