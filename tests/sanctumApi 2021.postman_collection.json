@@ -1,0 +1,1284 @@
+{
+	"info": {
+		"_postman_id": "eb151c50-db8d-4e04-b94e-948fa74c32f0",
+		"name": "sanctumApi 2021",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api info",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "root@app.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/signin",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user find by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "root@app.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/user/1",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order find by id with employee & customer & beers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "root@app.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/order/1?with=employee,customer,beers",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"order",
+						"1"
+					],
+					"query": [
+						{
+							"key": "with",
+							"value": "employee,customer,beers"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "beer find by id with orders",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "root@app.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/beer/8?with=orders",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"beer",
+						"8"
+					],
+					"query": [
+						{
+							"key": "with",
+							"value": "orders"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "beer find by id NOT found",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "root@app.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/beerNot/88AAA88",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"beerNot",
+						"88AAA88"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users get all",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "root@app.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/user",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "beers get all",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "root@app.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/beer",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"beer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "beer get all. paginated, page",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/beer?paginate=3&page=3",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"beer"
+					],
+					"query": [
+						{
+							"key": "paginate",
+							"value": "3"
+						},
+						{
+							"key": "page",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order get all. WITH a relations on beer and employee",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/order?with=beers,employee",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"order"
+					],
+					"query": [
+						{
+							"key": "with",
+							"value": "beers,employee"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order get all. WITH a relations on beer, employee & customer",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/order?with=beers,employee,customer",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"order"
+					],
+					"query": [
+						{
+							"key": "with",
+							"value": "beers,employee,customer"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "beer find by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://sanctumapi.incubics.net/api/beer/33",
+					"protocol": "https",
+					"host": [
+						"sanctumapi",
+						"incubics",
+						"net"
+					],
+					"path": [
+						"api",
+						"beer",
+						"33"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "employee find by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/employee/33",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"employee",
+						"33"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order find by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/order",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get order by iduser",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/order/7",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"order",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "UserName",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "SomeNewUser@app.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "password_confirm",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/user",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create beer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|YrpvoTplXVIPRs03rambuKL7SE5Ex5Ieo90087mD",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "BeerName",
+							"type": "text"
+						},
+						{
+							"key": "brewer",
+							"value": "Best Beers Inc.",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"value": "lager",
+							"type": "text"
+						},
+						{
+							"key": "yeast",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "perc",
+							"value": "10000.30",
+							"type": "text"
+						},
+						{
+							"key": "purchase_price",
+							"value": "0.0",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/beer",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"beer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create Employee",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|YrpvoTplXVIPRs03rambuKL7SE5Ex5Ieo90087mD",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "firstname",
+							"value": "Emplo",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "Worker",
+							"type": "text"
+						},
+						{
+							"key": "prefix_name",
+							"value": "von",
+							"type": "text"
+						},
+						{
+							"key": "department",
+							"value": "12345",
+							"type": "text"
+						},
+						{
+							"key": "employee_nr",
+							"value": "10000",
+							"type": "text"
+						},
+						{
+							"key": "branche",
+							"value": "none",
+							"type": "text"
+						},
+						{
+							"key": "titles",
+							"value": "Sir.",
+							"type": "text"
+						},
+						{
+							"key": "salary_scale",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "allowance",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "2077",
+							"type": "text"
+						},
+						{
+							"key": "function",
+							"value": "warehouse worker ",
+							"type": "text"
+						},
+						{
+							"key": "employee_since",
+							"value": "2019-01-01",
+							"type": "text"
+						},
+						{
+							"key": "birthday",
+							"value": "2000-01-01",
+							"type": "text"
+						},
+						{
+							"key": "addreess",
+							"value": "Straat",
+							"type": "text"
+						},
+						{
+							"key": "homenr",
+							"value": "10a",
+							"type": "text"
+						},
+						{
+							"key": "zip",
+							"value": "800AA",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "Zwollle",
+							"type": "text"
+						},
+						{
+							"key": "province",
+							"value": "OV",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/employee",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update Employee",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "_method",
+							"value": "PUT",
+							"type": "text"
+						},
+						{
+							"key": "firstname",
+							"value": "Emo",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "Worker",
+							"type": "text"
+						},
+						{
+							"key": "prefix_name",
+							"value": "von",
+							"type": "text"
+						},
+						{
+							"key": "department",
+							"value": "12345",
+							"type": "text"
+						},
+						{
+							"key": "employee_nr",
+							"value": "10000",
+							"type": "text"
+						},
+						{
+							"key": "branche",
+							"value": "none",
+							"type": "text"
+						},
+						{
+							"key": "titles",
+							"value": "Sir.",
+							"type": "text"
+						},
+						{
+							"key": "addreess",
+							"value": "Straat",
+							"type": "text"
+						},
+						{
+							"key": "salary_scale",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "allowance",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "2077",
+							"type": "text"
+						},
+						{
+							"key": "function",
+							"value": "warehouse worker ",
+							"type": "text"
+						},
+						{
+							"key": "employee_since",
+							"value": "2019-01-01",
+							"type": "text"
+						},
+						{
+							"key": "birthday",
+							"value": "2000-01-01",
+							"type": "text"
+						},
+						{
+							"key": "homenr",
+							"value": "10a",
+							"type": "text"
+						},
+						{
+							"key": "zip",
+							"value": "800AA",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "Zwollle",
+							"type": "text"
+						},
+						{
+							"key": "province",
+							"value": "OV",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/employee/70",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"employee",
+						"70"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update orders with Pivot",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|YXyHtsCWwOMpWOC9hxp8GXZAeRkTXofCW840qZQW",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "_method",
+							"value": "PUT",
+							"type": "text"
+						},
+						{
+							"key": "beer_id",
+							"value": "156",
+							"description": "part primary key pivot-table",
+							"type": "text"
+						},
+						{
+							"key": "order_id",
+							"value": "6",
+							"description": "part primary key pivot-table",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "55",
+							"description": "value to change in pivot (order_beer table)",
+							"type": "text"
+						},
+						{
+							"key": "employee_id",
+							"value": "66",
+							"description": "value to change in Order-Model ",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/order/6/beers/156",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"order",
+						"6",
+						"beers",
+						"156"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete Employee",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/employee/70",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"employee",
+						"70"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete relation order-beer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/order/6/beer/156",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"order",
+						"6",
+						"beer",
+						"156"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ONLINE beer find by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://sanctumapi.rk/api/beer/33",
+					"protocol": "http",
+					"host": [
+						"sanctumapi",
+						"rk"
+					],
+					"path": [
+						"api",
+						"beer",
+						"33"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

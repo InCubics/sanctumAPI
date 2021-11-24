@@ -20,7 +20,7 @@
         There are some examples migrations and seeders available to show and test the all the functionalities.<br>
         <br>
         <p><i class="fa fa-refresh" style="font-size:13px;"></i> All data and accounts will be reset every two hour</p>
-        <p><i class="fa fa-spinner fa-spin"></i>  You need a valid account to receive a token for CRUD-functionality .</p>
+        <p><i class="fa fa-spinner fa-spin"></i>  You need a valid account to receive a token to use CRUD-functionality .</p>
         <p><i class="fa fa-spinner fa-spin"></i>  Download  a POSTMAN-<a href="{{url('postman_testing')}}">workspace</a>,
             then import it and test the Sanctum-API.</p>
 
