@@ -86,7 +86,8 @@ class SelectController extends BaseController
             }
         elseif($request->paginate !== null && is_numeric($request->paginate) && $request->with === null)
         {   // get all records paginated and optional paged
-            $this->data = $this->objModel->with($this->objModel->relatedModels)
+            $this->data = $this->objModel
+//                ->with($this->objModel->relatedModels)
                     ->paginate($request->paginate, [ '*' ], 'page', $request->page)->all();
             if(empty($request->page)) {$request->page = 1;}
             $this->success  =true;
