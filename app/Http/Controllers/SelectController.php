@@ -95,6 +95,7 @@ class SelectController extends BaseController
             $this->message  ='Found records of: '.ucfirst($request->model).'Model paginated per '.$request->paginate;
             $this->message  .= ', page '.$request->page;
             $this->count    =count($this->data);
+            $this->total    = count($this->objModel->all());
             $this->paginate =$request->paginate;
             $this->page     =$request->page;
         }

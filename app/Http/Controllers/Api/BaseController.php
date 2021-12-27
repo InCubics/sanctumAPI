@@ -16,6 +16,7 @@ class BaseController extends Controller
     protected $message    ='FAILED; something went wrong';
     protected $validation =null;
     protected $count      =0;
+    protected $total      =null;
     protected $affected   =0;
     protected $paginate   =null;
     protected $page       =null;
@@ -44,6 +45,7 @@ class BaseController extends Controller
             'message'           =>$this->message,          // readable message
             'validation'        =>$this->validation,       // if invalid data is submitted
             'count'             =>$this->count,            // count of records requested
+            'total'             =>$this->total,                    // count of all posible records in request
             'affected'          =>$this->affected,         // count of records affected
             'pagination'        =>$this->paginate,
             'page'              =>$this->page,
